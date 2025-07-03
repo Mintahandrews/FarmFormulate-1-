@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Loader, Sparkles } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
+import { Textarea } from './ui/Textarea';
 import gsap from 'gsap';
 import { fadeIn, staggeredFadeIn, pulse } from '../utils/animations';
-import { useTranslation } from '../hooks/useTranslation';
 
 interface PromptInputProps {
   onSubmit: (prompt: string) => void;
@@ -142,12 +143,12 @@ export function PromptInput({ onSubmit, isLoading }: PromptInputProps) {
       <form onSubmit={handleSubmit} ref={formRef}>
         <div className="flex flex-col space-y-3">
           <div className="relative">
-            <textarea
+            <Textarea
               ref={textareaRef}
               value={prompt}
               onChange={handlePromptChange}
               placeholder={t('createSurvey')}
-              className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 h-24 resize-none"
+              className="w-full h-24"
               disabled={isLoading}
             />
             <button
@@ -190,7 +191,7 @@ export function PromptInput({ onSubmit, isLoading }: PromptInputProps) {
           {suggestions.map((suggestion, index) => (
             <button
               key={index}
-              ref={(el) => suggestionButtonsRef.current[index] = el}
+              ref={(el) => { suggestionButtonsRef.current[index] = el; return undefined; }}
               onClick={() => handleAnimatedSuggestionClick(suggestion)}
               className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded-full transition-colors"
               disabled={isLoading}

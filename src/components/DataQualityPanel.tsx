@@ -79,14 +79,14 @@ export function DataQualityPanel({ fields }: DataQualityPanelProps) {
         })
       };
       
-      setFormData(mockData);
+      setFormData(mockData as FormData);
       
       // Detect anomalies
       const detected = detectAnomalies(mockData);
       setAnomalies(detected);
       
       // Calculate scores
-      calculateScores(mockData);
+      calculateScores(mockData as FormData);
     }
   }, [fields]);
 
