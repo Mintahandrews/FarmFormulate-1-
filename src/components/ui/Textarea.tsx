@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import { cn } from '../../lib/utils';
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
@@ -24,15 +25,17 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <textarea
           id={textareaId}
           ref={ref}
-          className={`
-            w-full p-3 border rounded-md shadow-sm 
-            focus:ring-2 focus:ring-green-500 focus:border-green-500 
-            dark:bg-gray-800 dark:text-white dark:border-gray-700
-            ${error ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 dark:border-gray-600'} 
-            ${props.disabled ? 'bg-gray-100 dark:bg-gray-900 cursor-not-allowed' : ''}
-            resize-none min-h-[80px]
-            ${className}
-          `}
+          className={cn(
+            'w-full p-3 border rounded-md shadow-sm',
+            'focus:ring-2 focus:ring-green-500 focus:border-green-500',
+            'bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700',
+            'resize-none min-h-[80px] placeholder:text-gray-500 dark:placeholder:text-gray-400',
+            'font-medium text-base leading-relaxed tracking-normal',
+            'hover:border-green-400 dark:hover:border-green-500',
+            error ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 dark:border-gray-600',
+            props.disabled ? 'bg-gray-100 text-gray-700 dark:bg-gray-900 dark:text-gray-300 cursor-not-allowed' : '',
+            className
+          )}
           {...props}
         />
         

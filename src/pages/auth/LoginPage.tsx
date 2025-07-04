@@ -32,19 +32,19 @@ export function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+      <div className="max-w-md w-full space-y-8 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
         <div className="text-center">
           <div className="flex justify-center mb-4">
             <Logo size="lg" withText={true} />
           </div>
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">
+          <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
             {t('signInToAccount')}
           </h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
             {t('dontHaveAccount')}{' '}
             <Link 
               to="/signup" 
-              className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+              className="font-medium text-green-600 hover:text-green-700 dark:text-green-500 dark:hover:text-green-400"
             >
               {t('signUp')}
             </Link>
@@ -97,7 +97,7 @@ export function LoginPage() {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 dark:border-gray-600 rounded"
               />
               <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                 {t('rememberMe')}
@@ -107,7 +107,7 @@ export function LoginPage() {
             <div className="text-sm">
               <Link 
                 to="/forgot-password" 
-                className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+                className="font-medium text-green-600 hover:text-green-700 dark:text-green-500 dark:hover:text-green-400"
               >
                 {t('forgotPassword')}?
               </Link>

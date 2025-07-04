@@ -1,5 +1,5 @@
 {
-  "name": "mocha-app",
+  "name": "farm-formulate",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -32,7 +32,6 @@
     "zod": "^3.25.34"
   },
   "devDependencies": {
-    "@getmocha/vite-plugins": "latest",
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
     "@vitejs/plugin-react": "^4.3.1",

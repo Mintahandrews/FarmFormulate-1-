@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Dashboard component with animated statistics
+ * @typedef {import('gsap').gsap} gsap
+ */
+
 import { useState, useEffect, useRef } from 'react';
 import { BarChart3, LineChart, Loader, PieChart, Users } from 'lucide-react';
 import gsap from 'gsap';
@@ -123,8 +128,8 @@ export function Dashboard() {
   return (
     <div className="px-4 py-6 md:px-6 lg:px-8" ref={dashboardRef}>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">{t('dashboard')}</h1>
-        <p className="text-gray-600">{t('dashboardDescription')}</p>
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 tracking-tight">{t('dashboard')}</h1>
+        <p className="text-gray-600 dark:text-gray-400 font-medium">{t('dashboardDescription')}</p>
       </div>
       
       {/* Stats Overview */}
@@ -133,17 +138,17 @@ export function Dashboard() {
           <div 
             key={stat.id}
             ref={el => statCardsRef.current[index] = el}
-            className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 transition-shadow hover:shadow-md"
+            className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 transition-shadow hover:shadow-md"
           >
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-sm text-gray-500 mb-1">{stat.title}</p>
-                <p className="text-2xl font-bold">{stat.value}</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-300 mb-1">{stat.title}</p>
+                <p className="text-2xl font-bold dark:text-white tracking-tight">{stat.value}</p>
                 <div className="mt-1 flex items-center">
-                  <span className={`text-xs ${stat.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
+                  <span className={`text-xs ${stat.change.startsWith('+') ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
                     {stat.change}
                   </span>
-                  <span className="text-xs text-gray-400 ml-1">{t('lastMonth')}</span>
+                  <span className="text-xs text-gray-400 dark:text-gray-500 ml-1">{t('lastMonth')}</span>
                 </div>
               </div>
               <div className={`rounded-full p-2 ${stat.color}`}>

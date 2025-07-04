@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Form builder component with animation effects
+ * @typedef {import('gsap').gsap} gsap
+ */
+
 import { useState, useRef, useEffect } from 'react';
 import { PromptInput } from './PromptInput';
 import { FormPreview } from './FormPreview';
@@ -113,7 +118,7 @@ export function FormBuilder() {
   return (
     <div 
       ref={formBuilderRef} 
-      className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden"
     >
       <div ref={tabsRef}>
         <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />

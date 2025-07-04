@@ -1,10 +1,103 @@
-/* These are Tailwind CSS directives - ignore lint warnings */
+/* These are Tailwind CSS directives - they may show lint warnings but are required */
+/* tailwind:start */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* tailwind:end */
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Font settings for light/dark mode */
+body {
+  color: #1f2937; /* gray-800 for light mode */
+  background-color: #ffffff;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+.dark body {
+  color: #f3f4f6; /* gray-100 for dark mode */
+  background-color: #111827; /* gray-900 */
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Global dark mode styles */
+
+/* Base text and background colors */
+.dark {
+  color-scheme: dark;
+}
+
+/* Form elements */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="time"],
+input[type="search"],
+select,
+textarea {
+  color: #1f2937 !important; /* gray-800 for light mode */
+  background-color: white !important;
+  border-color: #d1d5db !important; /* gray-300 */
+}
+
+.dark input[type="text"],
+.dark input[type="number"],
+.dark input[type="email"],
+.dark input[type="password"],
+.dark input[type="date"],
+.dark input[type="time"],
+.dark input[type="search"],
+.dark select,
+.dark textarea {
+  color: #f3f4f6 !important; /* gray-100 for dark mode */
+  background-color: #1f2937 !important; /* gray-800 for dark mode */
+  border-color: #4b5563 !important; /* gray-600 */
+}
+
+/* Labels and text */
+.dark label,
+.dark .text-gray-700,
+.dark .text-gray-800,
+.dark .text-gray-900 {
+  color: #f3f4f6 !important; /* gray-100 - increased contrast */
+}
+
+.dark .text-gray-500,
+.dark .text-gray-600 {
+  color: #d1d5db !important; /* gray-300 - increased contrast */
+}
+
+/* Headings for better visibility */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: #f9fafb !important; /* gray-50 */
+  letter-spacing: -0.025em;
+}
+
+/* Card and container backgrounds */
+.dark .bg-white,
+.dark .bg-gray-50 {
+  background-color: #1f2937 !important; /* gray-800 */
+}
+
+/* Borders */
+.dark .border-gray-200,
+.dark .border-gray-300 {
+  border-color: #4b5563 !important; /* gray-600 */
 }
 
 @layer utilities {

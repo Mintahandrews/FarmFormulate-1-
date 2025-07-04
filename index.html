@@ -4,20 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="og:title" content="AgriNova AI" />
-    <meta property="og:description" content="Intelligent agricultural survey generation with AgriNova AI: Build, validate, and analyze farm data with AI assistance." />
-    <meta property="og:image" content="https://mocha-cdn.com/og.png" type="image/png" />
-    <meta property="og:url" content="https://t2j5j7zskaxaw.mocha.app" />
+    <meta property="og:description" content="Intelligent agricultural survey generation with FarmFormulate: Build, validate, and analyze farm data with AI assistance." />
+    <meta property="og:image" content="/favicon.ico" type="image/png" />
+    <meta property="og:url" content="https://farmformulate.app" />
     <meta property="og:type" content="website" />
-    <meta property="og:author" content="Mocha" />
-    <meta property="og:site_name" content="AgriNova AI" />
+    <meta property="og:author" content="FarmFormulate" />
+    <meta property="og:site_name" content="FarmFormulate" />
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:site" content="@buildwithmocha" />
-    <meta property="twitter:title" content="AgriNova AI" />
-    <meta property="twitter:description" content="Intelligent agricultural survey generation with AgriNova AI: Build, validate, and analyze farm data with AI assistance." />
-    <meta property="twitter:image" content="https://mocha-cdn.com/og.png" type="image/png" />
-    <link rel="shortcut icon" href="https://mocha-cdn.com/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" sizes="180x180" href="https://mocha-cdn.com/apple-touch-icon.png" type="image/png" />
-    <title>AgriNova AI</title>
+    <meta property="twitter:site" content="@farmformulate" />
+    <meta property="twitter:title" content="FarmFormulate" />
+    <meta property="twitter:description" content="Intelligent agricultural survey generation with FarmFormulate: Build, validate, and analyze farm data with AI assistance." />
+    <meta property="twitter:image" content="/favicon.ico" type="image/png" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" type="image/png" />
+    <title>FarmFormulate</title>
+    <script>
+      // Initialize theme before rendering to prevent flash of wrong theme
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

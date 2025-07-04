@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BarChart4, ChevronDown, FileText, Globe, CircleHelp, LayoutDashboard, Menu, CirclePlus, Moon, Sun, X } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
+import { useTheme } from '../contexts/ThemeContext';
 import { Logo } from './ui/Logo';
 import { withLanguageUpdates } from '../hoc/withLanguageUpdates';
 
@@ -10,6 +11,21 @@ function HeaderComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const { t, changeLanguage, currentLanguage, languageNames, availableLanguages } = useTranslation();
+  const { theme, toggleTheme } = useTheme();
+  
+  // Force re-render when theme changes
+  const [currentTheme, setCurrentTheme] = useState(theme);
+  
+  useEffect(() => {
+    setCurrentTheme(theme);
+    
+    const handleThemeChange = () => {
+      setCurrentTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    };
+    
+    window.addEventListener('themeChanged', handleThemeChange);
+    return () => window.removeEventListener('themeChanged', handleThemeChange);
+  }, [theme]);
   
   const menuRef = useRef<HTMLDivElement>(null);
   const languageMenuRef = useRef<HTMLDivElement>(null);
@@ -74,8 +90,8 @@ function HeaderComponent() {
   }, []);
 
   return (
-    <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40 flex-shrink-0">
+      <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <button
@@ -161,13 +177,10 @@ function HeaderComponent() {
             {/* Theme toggle */}
             <button 
               className="p-2 rounded-full text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              onClick={() => {
-                const isDark = document.documentElement.classList.toggle('dark');
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-              }}
-              aria-label={document.documentElement.classList.contains('dark') ? t('switchToLightMode') : t('switchToDarkMode')}
+              onClick={toggleTheme}
+              aria-label={currentTheme === 'dark' ? t('switchToLightMode') : t('switchToDarkMode')}
             >
-              {document.documentElement.classList.contains('dark') ? (
+              {currentTheme === 'dark' ? (
                 <Sun className="h-5 w-5" />
               ) : (
                 <Moon className="h-5 w-5" />
@@ -178,32 +191,33 @@ function HeaderComponent() {
         
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden" ref={menuRef}>
+          <div className="md:hidden absolute top-16 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg z-50 max-h-[calc(100vh-4rem)] overflow-y-auto" ref={menuRef}>
             <div className="pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
                 <Link
                   key={item.id}
                   to={item.path}
                   className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${isActive(item.path)
-                    ? 'border-indigo-500 text-indigo-700 bg-indigo-50 dark:bg-gray-700 dark:text-indigo-300'
-                    : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'}`}
-                  onClick={handlePageClick}
+                    ? 'border-indigo-500 text-indigo-700 bg-indigo-50 dark:bg-gray-700 dark:text-white'
+                    : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  <div className="flex items-center">
-                    <span className="mr-3">{item.icon}</span>
+                  <span className="inline-flex items-center">
+                    <span className="mr-2">{item.icon}</span>
                     {item.label}
-                  </div>
+                  </span>
                 </Link>
               ))}
               <Link
                 to="/forms/new"
-                className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-indigo-600 hover:bg-gray-50 hover:border-gray-300 dark:text-indigo-400"
-                onClick={handlePageClick}
+                className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-indigo-600 hover:bg-gray-50 hover:border-gray-300 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300"
+                onClick={() => setIsMenuOpen(false)}
               >
-                <div className="flex items-center">
-                  <CirclePlus className="w-5 h-5 mr-3" />
+                <span className="inline-flex items-center">
+                  <span className="mr-2"><CirclePlus className="h-5 w-5" /></span>
                   {t('createForm')}
-                </div>
+                </span>
               </Link>
             </div>
           </div>

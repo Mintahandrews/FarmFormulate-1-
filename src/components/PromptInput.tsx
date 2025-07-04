@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Component for handling prompt input with animations
+ * @typedef {import('gsap').gsap} gsap
+ */
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Loader, Sparkles } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
@@ -148,17 +153,18 @@ export function PromptInput({ onSubmit, isLoading }: PromptInputProps) {
               value={prompt}
               onChange={handlePromptChange}
               placeholder={t('createSurvey')}
-              className="w-full h-24"
+              className="w-full h-24 text-base font-medium text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:ring-green-500 dark:focus:ring-green-400"
               disabled={isLoading}
+              style={{ caretColor: 'currentColor' }}
             />
             <button
               type="submit"
               disabled={isLoading || !prompt.trim()}
-              className={`absolute bottom-3 right-3 inline-flex items-center px-4 py-2 rounded-md ${
+              className={`absolute bottom-3 right-3 inline-flex items-center px-4 py-2 rounded-md shadow-sm ${
                 isLoading || !prompt.trim() 
-                  ? 'bg-gray-300 cursor-not-allowed text-gray-500' 
-                  : 'bg-green-600 hover:bg-green-700 text-white'
-              } transition-colors`}
+                  ? 'bg-gray-300 dark:bg-gray-700 cursor-not-allowed text-gray-500 dark:text-gray-400' 
+                  : 'bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 text-white'
+              } transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800`}
               onClick={() => {
                 if (!isLoading && prompt.trim()) {
                   // Add sparkle effect on button click
@@ -193,7 +199,7 @@ export function PromptInput({ onSubmit, isLoading }: PromptInputProps) {
               key={index}
               ref={(el) => { suggestionButtonsRef.current[index] = el; return undefined; }}
               onClick={() => handleAnimatedSuggestionClick(suggestion)}
-              className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded-full transition-colors"
+              className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 py-1 px-3 rounded-full transition-colors border border-gray-200 dark:border-gray-700"
               disabled={isLoading}
             >
               {suggestion}

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import { LoadingSpinner } from './components/ui/LoadingSpinner';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { LandingPage } from './pages/landing/LandingPage';
@@ -9,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import Forms from './pages/Forms';
 import Analytics from './pages/Analytics';
 import Help from './pages/Help';
+import { FormBuilder } from './components/FormBuilder';
 import { Header } from './components/Header';
 import { useLanguageChangeListener } from './hooks/useLanguageChangeListener';
 import { useTranslation } from './hooks/useTranslation';
@@ -18,9 +20,11 @@ import './index.css';
 function App() {
   return (
     <Router>
-      <AuthProvider>
-        <AppContent />
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <AppContent />
+        </AuthProvider>
+      </ThemeProvider>
     </Router>
   );
 }
@@ -43,11 +47,11 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="flex flex-col h-screen overflow-hidden bg-gray-50 dark:bg-gray-900">
       {/* Header is now self-contained and will only show on authenticated routes */}
       <Header />
       
-      <main className="container mx-auto px-4 py-8">
+      <main className="flex-1 overflow-auto container mx-auto px-4 py-6">
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<LandingPage />} />
@@ -63,6 +67,11 @@ function AppContent() {
           <Route path="/forms" element={
             <ProtectedRoute>
               <Forms />
+            </ProtectedRoute>
+          } />
+          <Route path="/forms/new" element={
+            <ProtectedRoute>
+              <FormBuilder />
             </ProtectedRoute>
           } />
           <Route path="/analytics" element={

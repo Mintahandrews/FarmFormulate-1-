@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Form preview component with drag and drop functionality and animations
+ * @typedef {import('gsap').gsap} gsap
+ * @typedef {Object} Tween - GSAP animation tween
+ * @property {boolean} yoyo - Whether the animation plays back and forth
+ */
+
 import { useState, useRef, useEffect } from 'react';
 import { Field } from '../types';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -102,8 +109,8 @@ export function FormPreview({
   }, [mode]);
 
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden bg-white shadow-sm">
-      <div className="bg-gray-50 border-b border-gray-200 p-4">
+    <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-sm">
+      <div className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 p-4">
         <Tabs 
           tabs={tabs} 
           activeTab={mode} 
@@ -120,14 +127,14 @@ export function FormPreview({
                   type="text"
                   value={title}
                   onChange={(e) => onTitleChange(e.target.value)}
-                  className="w-full text-xl font-bold p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500"
+                  className="w-full text-xl font-bold p-2 border border-gray-300 dark:border-gray-600 rounded focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-gray-100"
                   onBlur={() => setEditingTitle(false)}
                   autoFocus
                 />
               </div>
             ) : (
               <div className="flex justify-between items-center mb-2" onClick={() => setEditingTitle(true)}>
-                <h3 className="text-xl font-bold cursor-pointer hover:text-green-600 transition-colors">
+                <h3 className="text-xl font-bold cursor-pointer hover:text-green-600 dark:hover:text-green-500 transition-colors dark:text-gray-100">
                   {title || t('untitledForm')}
                 </h3>
                 <Pencil className="w-4 h-4 text-gray-400" />
@@ -139,7 +146,7 @@ export function FormPreview({
                 <textarea
                   value={description}
                   onChange={(e) => onDescriptionChange(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500"
+                  className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-gray-100 font-medium"
                   onBlur={() => setEditingDescription(false)}
                   rows={3}
                   autoFocus
@@ -147,7 +154,7 @@ export function FormPreview({
               </div>
             ) : (
               <div 
-                className="text-gray-600 cursor-pointer hover:text-gray-800 transition-colors flex items-center"
+                className="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-gray-800 dark:hover:text-gray-100 transition-colors flex items-center"
                 onClick={() => setEditingDescription(true)}
               >
                 <p className="flex-1">{description || t('addDescription')}</p>
@@ -189,13 +196,13 @@ export function FormPreview({
                             <div className="flex space-x-2">
                               <button
                                 onClick={() => handleEditField(field, index)}
-                                className="p-1 text-gray-400 hover:text-blue-500"
+                                className="p-1 text-gray-400 hover:text-green-600 dark:hover:text-green-500"
                               >
                                 <Pencil className="w-4 h-4" />
                               </button>
                               <button
                                 onClick={() => onDeleteField(index)}
-                                className="p-1 text-gray-400 hover:text-red-500"
+                                className="p-1 text-gray-400 hover:text-red-500 dark:hover:text-red-400"
                               >
                                 <Trash2 className="w-4 h-4" />
                               </button>
@@ -228,7 +235,7 @@ export function FormPreview({
                 <button
                   key={type}
                   onClick={() => onAddField(type)}
-                  className="flex items-center justify-center p-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-md transition-colors text-sm"
+                  className="flex items-center justify-center p-2 bg-green-50 hover:bg-green-100 border border-green-200 text-green-700 dark:bg-green-900/20 dark:hover:bg-green-900/30 dark:border-green-800 dark:text-green-400 rounded-md transition-colors text-sm font-medium"
                 >
                   <CirclePlus className="w-4 h-4 mr-1" />
                   {label}
